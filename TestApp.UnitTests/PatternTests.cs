@@ -1,40 +1,54 @@
 ﻿using NUnit.Framework;
+using System;
 
 namespace TestApp.UnitTests;
 
 public class PatternTests
 {
-    // TODO: finish the test cases
-    //[TestCase()]
-    //[TestCase()]
-    //[TestCase()]
+    [TestCase("inthemix",5, "iNtHeMiXiNtHeMiXiNtHeMiXiNtHeMiXiNtHeMiX")]
+    [TestCase("inthemix", 1, "iNtHeMiX")]
+    [TestCase("inthemix", 2, "iNtHeMiXiNtHeMiX")]
     public void Test_GeneratePatternedString_ValidInput_ReturnsExpectedResult(string input, 
         int repetitionFactor, string expected)
     {
         // Arrange
 
         // Act
-        string result = Pattern.GeneratePatternedString(input, repetitionFactor);
+        string actual = Pattern.GeneratePatternedString(input, repetitionFactor);
 
         // Assert
-        Assert.That(result, Is.EqualTo(expected));
+
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [Test]
-    public void Test_GeneratePatternedString_EmptyInput_ThrowsArgumentException()
+    [TestCase("",1)]
+   
+    public void Test_GeneratePatternedString_EmptyInput_ThrowsArgumentException(string input,
+        int repetitionFactor)
     {
-        // TODO: finish the test
+        
+        //Act&Assert
+        Assert.Throws<ArgumentException>(() => Pattern.GeneratePatternedString(input,repetitionFactor));
+
+
     }
 
-    [Test]
-    public void Test_GeneratePatternedString_NegativeRepetitionFactor_ThrowsArgumentException()
+    [TestCase("inthemix", -1)]
+    [TestCase("inthemix", 0)]
+    public void Test_GeneratePatternedString_NegativeOrZeroRepetitionFactor_ThrowsArgumentException(string input,
+        int repetitionFactor)
     {
-        // TODO: finish the test
+        // Act
+        var exceptionActualMessage = Assert.Throws<ArgumentException>(() => Pattern.GeneratePatternedString(input, repetitionFactor));
+
+        // Assert
+        Assert.Throws<ArgumentException>(() => Pattern.GeneratePatternedString(input, repetitionFactor));
+
+        string expectedExceptionMsg = "Input string cannot be empty, and repetition factor must be positive.";
+
+        Assert.That(exceptionActualMessage.Message, Is.EqualTo(expectedExceptionMsg));
+
     }
 
-    [Test]
-    public void Test_GeneratePatternedString_ZeroRepetitionFactor_ThrowsArgumentException()
-    {
-        // TODO: finish the test
-    }
+
 }
