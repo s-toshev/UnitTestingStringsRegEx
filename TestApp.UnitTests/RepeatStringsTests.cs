@@ -22,12 +22,33 @@ public class RepeatStringsTests
     [Test]
     public void Test_Repeat_SingleInputString_ReturnsRepeatedString()
     {
-        // TODO: finish this test
+        //Arrange
+        string[] input = new string[] { "Naomi" };
+
+        //Act
+        string actual = RepeatStrings.Repeat(input);
+        string expected = "NaomiNaomiNaomiNaomiNaomi";
+
+        //Assert
+
+        Assert.AreEqual(expected, actual);
+
+
     }
 
     [Test]
     public void Test_Repeat_MultipleInputStrings_ReturnsConcatenatedRepeatedStrings()
     {
-        // TODO: finish this test
+        //Arrange
+        string[] input = new string[] { "Naomi", "InTheMix", "Milk" };
+
+        //Act
+        string actual = RepeatStrings.Repeat(input);
+        string expected = "NaomiNaomiNaomiNaomiNaomiInTheMixInTheMixInTheMixInTheMixInTheMixInTheMixInTheMixInTheMixMilkMilkMilkMilk";
+
+        //Assert
+
+        Assert.AreEqual(expected, actual);
+
     }
 }
