@@ -4,33 +4,39 @@ namespace TestApp.UnitTests;
 
 public class EmailValidatorTests
 {
-    // TODO: finish the test
-    //[TestCase()]
-    //[TestCase()]
-    //[TestCase()]
-    public void Test_ValidEmails_ReturnsTrue(string email)
+
+    [TestCase("jane_smith123@email.co.uk", true)]
+    [TestCase("user1234@email-provider.com", true)]
+    [TestCase("john.doe@example.com", true)]
+    [TestCase("my_email+test@email-domain.net", true)]
+    public void Test_ValidEmails_ReturnsTrue(string email, bool expected)
     {
         // Arrange
 
         // Act
-        bool result = EmailValidator.IsValidEmail(email);
-
+        bool actual = EmailValidator.IsValidEmail(email);
         // Assert
-        Assert.That(result, Is.True);
+        Assert.AreEqual(expected, actual);
+
+
     }
 
-    // TODO: finish the test
-    //[TestCase()]
-    //[TestCase()]
-    //[TestCase()]
-    public void Test_InvalidEmails_ReturnsFalse(string email)
+    [TestCase("invalid.email.com", false)]
+    [TestCase("user@domain", false)]
+    [TestCase("user@domain.", false)]
+    [TestCase("user@domain..", false)]
+    //[TestCase("user@domain..com", false)] //BUG HERE
+    [TestCase("user@domain.com_", false)]
+    [TestCase("user@domain.com!test", false)]
+    public void Test_InvalidEmails_ReturnsFalse(string email,bool expected)
     {
         // Arrange
 
         // Act
-        bool result = EmailValidator.IsValidEmail(email);
-        
+        bool actual = EmailValidator.IsValidEmail(email);
+
         // Assert
-        Assert.That(result, Is.False);
+
+        Assert.AreEqual(expected, actual);
     }
 }

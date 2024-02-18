@@ -12,26 +12,38 @@ public class MatchPhoneNumbersTests
         string phoneNumbers = "+359-2-124-5678, +359 2 986 5432, +359-2-555-5555";
 
         // Act
-
+        string actual = MatchPhoneNumbers.Match(phoneNumbers);
+        string expected = "+359-2-124-5678, +359 2 986 5432, +359-2-555-5555";
         // Assert
-        //Assert.That(result, Is.EqualTo(expected));
+        Assert.AreEqual(expected, actual);
     }
 
-    [Test]
-    public void Test_Match_NoValidPhoneNumbers_ReturnsEmptyString()
+    [TestCase("088434534, +359894494431, +359-2-312-11", "")]
+    [TestCase("", "")]
+    public void Test_Match_NoValidPhoneNumbersOrEmptyInput_ReturnsEmptyString(string phoneNumbers, string expected)
     {
-        // TODO: finish the test
+        //Act
+        string actual = MatchPhoneNumbers.Match(phoneNumbers);
+
+
+        //Assert
+        Assert.AreEqual(expected, actual);
+
+
     }
 
-    [Test]
-    public void Test_Match_EmptyInput_ReturnsEmptyString()
-    {
-        // TODO: finish the test
-    }
+
 
     [Test]
     public void Test_Match_MixedValidAndInvalidNumbers_ReturnsOnlyValidNumbers()
     {
-        // TODO: finish the test
+        // Arrange
+        string phoneNumbers = "+359-2-124-5678, +359 2 986 5432, +359-2-555-5555, 088434534, +359894494431, +359-2-312-11";
+
+        // Act
+        string actual = MatchPhoneNumbers.Match(phoneNumbers);
+        string expected = "+359-2-124-5678, +359 2 986 5432, +359-2-555-5555";
+        // Assert
+        Assert.AreEqual(expected, actual);
     }
 }
